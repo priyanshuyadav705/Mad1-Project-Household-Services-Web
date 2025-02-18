@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Service details - A to Z Household services
+{% endblock %}
+
+{% block content %}
+<div class="heading">
+    <h2 class = "text-muted">Service requests of {{service.service_name}} service</h2>
+</div>
+<hr>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Assigned Professional(if any)</th>
+            <th>Requested date</th>
+            <th>Status</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% if service_requests %}
+        {% for service_request in service_requests %} 
+            <tr>
+               <td>{{service_request.id}}</td>
+               <td>{{service_request.professional.name}}</td>
+               <td>{{service_request.date_of_request}}</td>
+                <td>
+            {% if service_request.service_status == 'Requested'%}
+               <p>Requested</p>
+            {% elif service_request.service_status == 'accepted' %}
+               <p>accepted</p>
+            {% elif service_request.service_status == 'rejected' %}
+                <p>rejected</p>
+            {% else %}
+                <p>closed</p>
+            {% endif %}
+                    
+                </td>
+            </tr>
+         {% endfor %}
+        {% else %}
+             <tr>
+                <td colspan="4"> No service requests found. </td>
+             </tr>
+        {% endif %}
+    </tbody>
+ </table>
+
+{% endblock %}
+
+{% include 'admin_nav.html' %} 
+
+{% block style %}
+<style>
+    .heading{
+        text-align: center;
+    }
+   .table{
+    margin-top: 5%;
+   }
+</style>
+{% endblock %}

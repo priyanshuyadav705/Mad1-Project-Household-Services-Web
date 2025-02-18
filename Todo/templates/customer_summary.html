@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Customer Summary - A to Z Household services
+{% endblock %}
+
+{% block content %}
+<h3>Service Requests</h3>
+<div class="summary_chart">
+    <img src="/static/customer_summary/customer_summary_{{customer.customer_id}}.jpg" width = "600" height="500">
+</div>
+{% endblock %}
+
+{% include 'customer_nav.html' %} 
+
+{% block style %}
+<style>
+    h3{
+        text-align: center;
+    }
+    .summary_chart{
+        text-align:center;
+    }
+    
+</style>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block content%}
+    <h1>Profile
+    <small class = 'text-muted'>(@{{user.email}})</small>
+    </h1>
+    <hr>
+    <h3> Edit Profile</h3>
+    <form class="form" method="post">
+    <label for="email" class = "form-label">New Email:
+        <input type="text" name="email" id="email" class="form-control" >
+    </label>
+    <label for="name" class = "form-label">New Name:
+        <input type="text" name="name" id="name" class="form-control">
+    </label>
+    <label for="currentpassword" class = "form-label">Current Password:
+         <input type="text" name="currentpassword" id="currentpassword" class="form-control">
+    </label>
+    <label for="password" class = "form-label">New Password
+        <input type="text" name="password" id="password" class="form-control">
+    </label>
+    <br>
+    <input type="submit" value="Update changes" class = "btn btn-success"/>
+    <a href="{{url_for('views.customer_logout')}}" class="btn btn-danger">Logout</a>
+    </form>
+
+ {% endblock %}
+ {% block style %}
+ <style>
+    h1{
+        text-align: center;
+    }
+    .form{
+        text-align: center;
+    }
+    h3{
+        text-align: center;
+    }
+    
+ </style>
+ {% endblock %}
+        

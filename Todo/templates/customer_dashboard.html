@@ -1,0 +1,104 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Customer Dashboard  - A to Z Household services
+{% endblock %}
+
+{% block content %}
+<h2 class="mt-2">Customer Dashboard </h2>
+<br>
+<p>
+  <a href="{{ url_for('views.customer_profile') }}" class="profile">
+    <i class="fas fa-user">
+      edit/view profile
+    </i>
+  </a>
+</p>
+<br>
+<h2 class="text-muted">Looking For Service ?</h2>
+<div  class="services">
+    <a href="{{ url_for('views.service_details', service_name='AC Repair')}}">AC Repair</a>
+    <a href="{{ url_for('views.service_details', service_name='Saloon')}}">Saloon</a>
+    <a href="{{ url_for('views.service_details', service_name='Cleaning')}}">Cleaning</a>
+    <a href="{{ url_for('views.service_details', service_name='Electrician')}}">Electrician</a>
+    <a href="{{ url_for('views.service_details', service_name='Plumbing')}}">Plumbing</a>
+    <a href="{{ url_for('views.service_details', service_name='Cooking')}}">Cooking</a>
+    <a href="{{ url_for('views.service_details', service_name='Appliance Repair')}}">Appliance Repair</a>
+    <a href="{{ url_for('views.service_details', service_name='Gardening')}}">Gardening</a>
+</div>
+<br>
+<div class = "heading">
+<h3 class="text-muted">Service History</h3>
+</div>
+    <table class="table" mt-5>
+        <thead>
+             <tr>
+                 <th>Service Request ID</th>
+                 <th>Service Name</th>
+                 <th>Professional Name</th>
+                 <th>Phone no.</th>
+                 <th>Status</th>
+             </tr>
+        </thead>
+        <tbody>
+          {% if service_requests %}
+             {% for service_request in service_requests %}
+                 <tr>
+                   <td>{{ service_request.id }}</td>
+                   <td>{{ service_request.services.service_name }}</td>
+                   <td>{{ service_request.professional.name }}</td>
+                   <td> {{service_request.professional.phonenumber}}</td>
+                   <td>
+                      {% if service_request.service_status == 'closed' %}
+                         <p>Closed</p>
+                      {% elif service_request.service_status == 'Requested' %}
+                          <p>Requested</p>
+                      {% elif service_request.service_status == 'rejected' %}
+                          <p>Rejected</p>
+                      {% else  %}
+                           <a href=" {{ url_for('views.service_close', professional_id = service_request.professional.professional_id,service_request_id = service_request.id) }}">Close it?</a>
+                      {% endif %}
+                   </td>
+                 </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+               <td colspan="5"> No service history found. </td>
+            </tr>
+       {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% include 'customer_nav.html' %} 
+
+{% block style %}
+<style>
+    h2{
+      text-align: center;
+    }
+    p{
+      text-align: right;
+      margin-right: 5%;
+    }
+    .services{
+      justify-content: center;
+      border: 2px solid #e0e3dc;
+      padding: 20px;
+      margin: auto;
+      border-radius: 10px;
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+    }
+    a{
+      
+      
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+    }
+
+</style>
+{% endblock %}

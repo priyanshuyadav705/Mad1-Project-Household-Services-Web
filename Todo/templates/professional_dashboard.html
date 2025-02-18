@@ -1,0 +1,127 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Professioanal Dashboard- A to Z Household services
+
+{% endblock %}
+
+{% block content %}
+<h2>Professional dashboard</h2>
+<br>
+<p>
+<a href="{{url_for('views.professional_profile')}}" class="btn btn-success">
+    <i class  = "fas fa-user"></i>
+      View/Edit Profile details</a>
+</p>
+<div class = "heading">
+     <h3 class="text-muted">
+      Today Services
+     </h3>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Customer Name</th>
+            <th>Contact Phone</th>
+            <th>Location(withpincode)</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% if today_services %}
+       {% for service_request in today_services %}
+         <tr>
+            <td>{{ service_request.id }}</td>
+            <td>{{ service_request.customers.name }}</td>
+            <td>{{ service_request.customers.contact_number}}</td>
+            <td>{{ service_request.customers.location }} ({{ service_request.customers.pincode }})</td>
+            <td>
+                {% if service_request.service_status == 'accepted' %}
+                   <p>accepted</p>
+                {% elif service_request.service_status == 'rejected'%}
+                   <p>rejected</p>
+                {% elif service_request.service_status == 'closed'%}
+                   <p>closed</p>
+                {% else %}
+                   <a class="btn btn-success" href="{{ url_for('views.professional_customer_accept',id = service_request.id) }}">
+                   <i class="fas fa-check">Accept</i>
+                   </a>
+                   <a class="btn btn-danger" href="{{ url_for('views.professional_customer_reject',id = service_request.id) }}">
+                   <i class="fas fa-bin">Reject</i>
+                   </a>
+                {% endif %}
+            </td>
+         </tr>
+       {% endfor %}
+    {% else %}
+       <tr>
+           <td colspan="4">No Customer Found</td>
+       </tr>
+    {% endif %}
+  </tbody>
+</table>
+
+<div class = "heading">
+  <h3 class="text-muted">
+   Closed Services
+  </h3>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+       <th>ID</th>
+       <th>Customer Name</th>
+       <th>Conatact Phone</th>
+       <th>Location(withpincode)</th>
+       <th>Date</th>
+       <th>Rating out of 5</th>
+       <th>Remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% if closed_services %}
+      {% for service_request in closed_services %}
+      <tr>
+         <td>{{ service_request.id }}</td>
+         <td>{{ service_request.customers.name }}</td>
+         <td> {{ service_request.customers.contact_number }}</td>
+         <td>{{ service_request.customers.location }} ({{ service_request.customers.pincode }})</td>
+         <td> {{ service_request.date_of_completion }}</td>
+         <td>{% if service_request.review %}
+                {{ service_request.review.rating}}
+             {% else %}
+                 N/A
+             {% endif %}
+         </td>
+         <td>{% if service_request.review == '' %}
+                 N/A
+             {% else %}
+                 {{ service_request.review.remarks }}
+             {% endif %}
+         </td>
+      </tr>
+      {% endfor %}
+  {% else %}
+    <tr>
+        <td colspan="6">No Customer Found</td>
+    </tr>
+  {% endif %}
+</tbody>
+</table>
+
+{% endblock %}
+
+
+{% include 'professional_nav1.html' %}
+{% block style %}
+<style>
+    h2{
+      text-align: center;
+    }
+    p{
+      text-align: right;
+      margin-right: 5%;
+    }
+</style>
+{% endblock %}

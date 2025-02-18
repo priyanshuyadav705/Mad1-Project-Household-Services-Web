@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Admin summary - A to Z Household services
+{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<div>
+    <div class = "summary-container">
+        <div class = "type">
+        <h4>Overall Customer Rating</h4>
+           <div class="rating_chart">
+               <img src = "/static/admin_summary/rating_summary.jpg" width = "500" height="300">
+            </div>
+
+        </div>
+    </div>
+    <div class="summary-container">
+        <div class="type">
+            <h4>Service Requests Summaries</h4>
+            <div class="service_requests_chart">
+                <img src="/static/admin_summary/service_request.jpg" width = "500" height="300">
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% include 'admin_nav.html' %} 
+
+{% block style %}
+<style>
+    h4{
+        text-align: center;
+    }
+    .summary-container{
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin-left: 12%;
+        margin-right: 10%;
+    }
+    .type{
+        width: 50%;
+    }
+    .service_requests_chart{
+        text-align:right;
+        margin-right: 10%;
+    }
+    .rating_chart , .service_requests_chart {
+        text-align: center;
+    }
+    
+    
+</style>
+{% endblock %}

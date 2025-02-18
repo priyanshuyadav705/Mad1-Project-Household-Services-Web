@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Admin login - A to Z Household services
+{% endblock %}
+
+{% block content %}
+<h2>Admin - A to Z Household Services</h2>
+      <hr>
+      <form method="post" class="mt-5">
+            <label for="email" class = 'form-label'>Email:
+               <input type="email" name="email" id="email" >
+            </label>
+           <br>
+            <label for="password" class = 'form-label'>Password:
+            <input type="password" name="password" id = "password" >
+            </label>
+            <br>
+            <br>
+            <input type="submit" value="login" class="btn btn-success">
+       </form>
+{% endblock %}
+
+{% include 'admin_login_nav.html' %}
+
+{% block style %}
+<style>
+   .login-container form {
+      text-align: center;
+   }
+   h2 {
+      margin-top: 5%;
+      text-align: center;
+   }
+  
+</style>
+{% endblock %}

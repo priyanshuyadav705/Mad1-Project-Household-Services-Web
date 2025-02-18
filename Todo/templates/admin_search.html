@@ -1,0 +1,127 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Admin Search - A to Z Household services
+{% endblock %}
+
+
+
+{% block style %}
+<style>
+     h2 {
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <h2>Admin Search</h2>
+    {% include "searchbar.html" with context %}
+    
+    {% if services %}
+        <h2>Service ({{ search }})</h2>
+        <table class="table" mt-5>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Base Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in services %}
+                <tr>
+                    <td>{{ service.service_id }}</td>
+                    <td>{{ service.service_name }}</td>
+                    <td>{{ service.base_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    {% if professionals %}
+        <h2>Professional {{ search }}</h2>
+        <table class="table" mt-5>
+            <thead>
+                   <tr>
+                       <th>ID</th>
+                       <th>Name</th>
+                       <th>Experience</th>
+                       <th>Service name</th>
+                       <th>Action</th>
+                   </tr>
+                </thead>
+                <tbody>
+                   {% for professional in professionals %}
+                    <tr>
+                        <td>{{ professional.professional_id}}</td>
+                        <td>{{ professional.name}}</td>
+                        <td>{{ professional.experience}}</td>
+                        <td> {% if professional.services  %}
+                                 {% for service in professional.services %}
+                                    {{ service.service_name }}{% if not loop.last %}, {% endif %}
+                                 {% endfor %}
+                             {% else %}
+                                  No Services Assigned
+                             {% endif %}
+                        <td>{{ professional.action }}</td>
+                    </tr>   
+                    {% endfor %}
+                
+                </tbody>
+            </table>
+        {% endif %}
+        {% if servicereqs %}
+            <h2>Service Request {{ search }}</h2>
+            <table class="table" mt-5>
+                <thead>
+                    <tr>
+                       <th>ID</th>
+                       <th>Professional Name</th>
+                       <th>Date of Request</th>
+                       <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for request in servicereqs %}
+                    <tr>
+                       <td>{{ request.id }}</td>
+                       <td>{{ request.professional.name }}</td>
+                       <td>{{ request.date_of_request }}</td>
+                       <td>{{ request.service_status }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+         </table>
+        {% endif %}
+        {% if customers %}
+            <h2>Customer {{ search }}</h2>
+            <table class="table" mt-5>
+                <thead>
+                    <tr>
+                       <th>ID</th>
+                       <th>Customer Name</th>
+                       <th>Contact Number</th>
+                       <th>Address</th>
+                       <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for customer in customers %}
+                    <tr>
+                       <td>{{ customer.customer_id }}</td>
+                       <td>{{ customer.name }}</td>
+                       <td>{{ customer.contact_number }}</td>
+                       <td>{{ customer.address}}</td>
+                       <td>{{ customer.service_requests[0].service_status }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+
+{% endblock %}
+
+
+{% include 'admin_nav.html' %} 

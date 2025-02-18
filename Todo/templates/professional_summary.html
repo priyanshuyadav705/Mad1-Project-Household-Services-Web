@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Professionaal summaries - A to Z Household services
+{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<div>
+    <div class = "summary-container">
+        <div class = "type">
+        <h4>Customer Rating</h4>
+           <div class="rating_chart">
+                    <img src="/static/professional_summary/professional_{{professional}}_pie.jpg" width = "500" height="300">
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="summary-container">
+        <div class="type">
+            <h4>Service Requests</h4>
+            <div class="service_requests_chart">
+                <img src="/static/professional_summary/professional_{{professional}}.jpg" width = "500" height="300">
+        </div>
+    </div>
+{% endblock %}
+
+{% include 'professional_nav1.html' %} 
+
+{% block style %}
+<style>
+    h4{
+        text-align: center;
+    }
+    .summary-container{
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin-left: 12%;
+        margin-right: 10%;
+    }
+    .type{
+        width: 50%;
+    }
+    .service_requests_chart{
+        text-align:right;
+        margin-right: 10%;
+    }
+    .rating_chart , .service_requests_chart {
+        text-align: center;
+    }
+    
+    
+</style>
+{% endblock %}

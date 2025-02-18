@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+professional details - A to Z Household services
+{% endblock %}
+
+{% block content %}
+<br>
+<h4>Professional Info</h4>
+<hr>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Professional Name</th>
+            <th>Address</th>
+            <th>Experience</th>
+            <th>Service</th>
+            <th>Service description</th>
+            <th>Avg. Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ professional.professional_id}}</td>
+            <td>{{ professional.name }}</td>
+            <td>{{ professional.address }}</td>
+            <td>{{ professional.experience }}</td>
+            <td>{% for service in professional.services %}
+                   {{ service.service_name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}   
+            </td>
+            <td>{{ professional.service_description}}</td>
+            <td>
+                {% if rating is not none %}
+                    {{avg_rating}}
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+   
+{% endblock %}
+
+{% include 'admin_nav.html' %} 
+
+{% block style %}
+<style>
+    h4{
+        text-align: center;
+    }
+   .table{
+    margin-top: 20%;
+   }
+</style>
+{% endblock %}

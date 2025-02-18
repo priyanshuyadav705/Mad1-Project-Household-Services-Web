@@ -1,0 +1,136 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Customer Dashboard Service  - A to Z Household services
+
+{% endblock %}
+
+{% block content %}
+<h2 class="mt-2">Customer Dashboard </h2>
+<br>
+<p>
+  <a href="{{ url_for('views.customer_profile') }}" class="profile">
+    <i class="fas fa-user">
+      edit/view profile
+    </i>
+  </a>
+</p>
+<br>
+<div class = "heading1">
+  <h3 class="text-muted"> Best {{service_name}} services</h3>
+</div>
+
+<div class="service_information">
+      <p><strong>Service description | Avg. Rating | Base price | Created on</strong></p>
+      {% for service in all_services %}
+         {% if service.service_name == service_name %}
+              {% if service.professionals %} 
+                  {% for professional in service.professionals %}
+                    <p>{{ loop.index}}.
+                       {{ professional.service_description }},
+                       {% set rating = professional_avg_rating.get(professional.professional_id)%}
+                       {{ rating if rating is not none else 'N/A' }},
+                       {{ service.base_price }},
+                       {{ service.created_at }}
+                       <a href="{{url_for('views.service_book',professional_id = professional.professional_id,service_id=service.service_id )}}">Book</a>
+                    </p>
+                  {% endfor %}
+              {% elif service.service_name == service_name %}
+                     <p>{{ loop.index}}.
+                     {{ service.description }},
+                     {% set rating = professional_avg_rating.get(professionals.professional_id)%}
+                       {{ rating if rating is not none else 'N/A' }},
+                     {{ service.base_price }},
+                     {{ service.created_at }},
+                     Professional not available yet.
+
+                    </p>
+              {% endif %}
+         {% endif %}
+      {% endfor %}
+</div>
+
+<div class = "heading">
+  <h3 class="text-muted">Service History</h3>
+  </div>
+      <table class="table">
+          <thead>
+               <tr>
+                   <th>Service request ID</th>
+                   <th>Service Name</th>
+                   <th>Professional Name</th>
+                   <th>Phone no.</th>
+                   <th>Status</th>
+               </tr>
+          </thead>
+          <tbody>
+            {% if service_requests %}
+               {% for service_request in service_requests %}
+                   <tr>
+                     <td>{{ service_request.id }}</td>
+                     <td>{{ service_request.services.service_name }}</td>
+                     <td>{{ service_request.professional.name }}</td>
+                     <td> {{service_request.professional.phonenumber}}</td>
+                     <td>
+                        {% if service_request.service_status == 'closed' %}
+                           <p>Closed</p>
+                        {% elif service_request.service_status == 'Requested' %}
+                            <p>Requested</p>
+                        {% elif service_request.service_status == 'rejected' %}
+                            <p>Rejected</p>
+                        {% else  %}
+                        <a href=" {{ url_for('views.service_close', professional_id = service_request.professional.professional_id,service_request_id = service_request.id) }}">Close it?</a>
+  
+                          
+                        {% endif %}
+               
+                      </td>
+                   </tr>
+              {% endfor %}
+          {% else %}
+              <tr>
+                 <td colspan="5"> No service history found. </td>
+              </tr>
+         {% endif %}
+          </tbody>
+      </table>
+  </div>
+{% endblock %}
+
+{% include 'customer_nav.html' %} 
+
+{% block style %}
+<style>
+    .service_information{
+
+      border: 2px solid #ccc;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .heading1{
+      text-align: center;
+    }
+    h2{
+      text-align: center;
+    }
+    p{
+      text-align: right;
+      margin-right: 5%;
+    }
+
+    .services{
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 15%;
+    }
+
+</style>
+{% endblock %}

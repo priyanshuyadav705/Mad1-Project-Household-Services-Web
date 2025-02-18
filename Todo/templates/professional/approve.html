@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+professional delete - A to Z Household services
+{% endblock %}
+
+{% block content %}
+    <h2>Approve Professional</h2>
+    <hr>
+    <h3 class="text-center text-success">Are you sure you want to approve
+        {{professional.name}}?
+    </h3>
+    <br>
+    <form method="post" class="form">
+        <input type="submit" value="Approve" class = "btn btn-success">
+        <a href="{{url_for('views.admin_dashboard')}}" class = "btn btn-secondary">Cancel</a>
+       
+    </form>
+
+{% endblock %}
+
+{% block style %}
+<style>
+    h2{
+        text-align: center;
+    }
+    h1{
+        text-align: center;
+    }
+    .form{
+        text-align: center;
+    }
+</style>
+{% endblock %}

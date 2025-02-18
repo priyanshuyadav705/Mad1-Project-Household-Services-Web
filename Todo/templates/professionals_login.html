@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Professionals Login - A to Z Household services
+{% endblock %}
+
+{% block content %}
+<h2>Professional login</h2>
+      <p>
+      <a href="{{url_for('views.customer_signup')}}" class="">Signup as Customer</a>
+      </p>
+      <hr>
+      <form method="post" class="mt-5">
+            <label for="email" class = 'form-label'>Email:
+               <input type="email" name="email" id="email" >
+            </label>
+           <br>
+            <label for="password" class = 'form-label'>Password:
+            <input type="password" name="password" id = "password" >
+            </label>
+            <br>
+            <br>
+            <input type="submit" value="login" class="btn btn-success">
+       </form>
+       <div>
+        Not have an account ? :<a href="{{url_for('views.professionals_register')}}">Register as professionals</a>
+       </div>
+{% endblock %}
+{% include 'professional_nav.html' %}
+{% block style %}
+<style>
+   .login-login-container form {
+      text-align: center;
+   }
+   p {
+      text-align: right;
+      margin-right: 2%;
+   }
+   h2 {
+      margin-top: 5%;
+      text-align: center;
+   }
+   div {
+         text-align: center;
+    }
+</style>
+{% endblock %}

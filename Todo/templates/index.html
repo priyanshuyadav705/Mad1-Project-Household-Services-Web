@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+ welcome to A to Z Household services
+{% endblock %}
+
+{% block content %}
+<h1>Welcome to A to Z Household services</h1>
+<br>
+<div class = "login-links" >
+<p>If you are a Admin, click <a href="{{url_for('views.admin_login')}}" class="">Admin</a></p>
+<p>If you are a Customer, click <a href="{{url_for('views.login')}}" class="">Customer</a></p>
+<p>If you are a Professional, click <a href="{{url_for('views.professional_login')}}" class="">Professionals</a></p>
+{% endblock %}
+
+{% block style %}
+<style>
+   h1 {
+      margin-top: 5%;
+      text-align: center;
+   }
+   .login-links {
+      display: flex;
+      justify-content:center;
+      gap: 20px;
+   }
+   p {
+      margin: 0%;
+   }
+</style>
+{% endblock %}

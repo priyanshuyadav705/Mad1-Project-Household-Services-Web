@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Add Service - A to Z Household services
+{% endblock %}
+
+{% block content %}
+<h2> New Service</h2>
+<hr>
+<div class = "login-container" >
+      <form method="post" class="mt-5">
+            <label for="service">Service Name:</label>
+            <input type="text" name="name" id="service">
+            <br>
+            <label for="description" class = 'form-label'>Description:
+            <textarea name="description" id="description"></textarea >
+            </label>
+            <label for="base_price" class = 'form-label'>Base Price:
+            <input type="number" name="base_price" id = "base price" class="form-control" >
+            </label>
+            <br>
+            <input type="submit" value="Add" class="btn btn-success">
+            <a href="{{url_for('views.admin_dashboard')}}" class = "btn btn-secondary">Cancel</a>
+       </form>
+   </div>
+{% endblock %}
+       
+{% block style %}
+<style>
+      h2{
+            text-align: center;
+      }
+      .login_container{
+            text-align: center;
+      }
+      form{
+            text-align: center;
+      }
+</style>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Service close - A to Z Household services
+{% endblock %}
+
+{% block content %}
+<h2>Service Remark</h2>
+<hr>
+<h2>Request id: {{ service_request.id }}</h2>
+       <br>
+       <div class="line1">
+           {{ service.service_name}} |
+           {{ professional.service_description}} |
+           {{ current_time }}
+    </div>
+    <br>
+    <div class="line2">
+        {{ professional.professional_id}}. |
+        {{ professional.name}} |
+        {{ customer.contact_number}} 
+    </div>
+     <br>
+
+    <form class="form" action="{{ url_for('views.service_close', professional_id = professional.professional_id, service_request_id = service_request.id) }}" method="POST">
+        <input type="hidden" name="id" value = "{{ service_request.id }}">
+        <label for="service_rating" class="form-label">
+              Rating: 
+        <div class="rating">
+            <input type="radio" name="rating" value="1" id="star1">
+            <label for="star1" class="star">&#9733;</label>
+            <input type="radio" name="rating" value="2" id="star2">
+            <label for="star2" class="star">&#9733;</label>
+            <input type="radio" name="rating" value="3" id="star3">
+            <label for="star3" class="star">&#9733;</label>
+            <input type="radio" name="rating" value="4" id="star4">
+            <label for="star4" class="star">&#9733;</label>
+            <input type="radio" name="rating" value="5" id="star5">
+            <label for="star5" class="star">&#9733;</label>
+                
+        </div>
+        </label>
+        <br>
+        <label for="remarks">
+              Remarks(if any):
+        <input type="textarea" name="remarks" id="remarks">
+        </label>
+        <input  type="submit" value="Submit" >
+        <input type="button" value="Cancel" onclick="window.history.back();">
+        </form>
+{% endblock %}
+
+{% block style %}
+<style>
+    h2,h3 {
+        text-align: center;
+    }
+    .line1{
+        display: flex;
+        justify-content: center;
+        gap: 5%;
+    }
+    .line2{
+        display: flex;
+        justify-content: center;
+        gap: 5%;
+    .form-label{
+        display: block;
+        margin: 10px 0;
+    }
+    }
+    .form{
+        text-align: center;
+    }
+</style>
+{% endblock %}

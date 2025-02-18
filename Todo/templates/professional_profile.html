@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block content%}
+    <h1>Profile
+    <small class = 'text-muted'>(@{{user.email}})</small>
+    </h1>
+    <hr>
+    <h3> Edit Profile</h3>
+    <form class="form" method="post">
+    <label for="email" class = "form-label">New Email:
+        <input type="text" name="email" id="email" class="form-control" >
+    </label>
+    <label for="name" class = "form-label">New Name:
+        <input type="text" name="name" id="name" class="form-control">
+    </label>
+    <label for="currentpassword" class = "form-label">Current Password:
+         <input type="text" name="currentpassword" id="currentpassword" class="form-control">
+    </label>
+    <label for="password" class = "form-label">New Password
+        <input type="text" name="password" id="password" class="form-control">
+
+    </label>
+    <label for="Services">Service Name:</label>
+        <select name="service" id="service">
+              <option value="AC Repair">AC Repair</option>
+              <option value="Saloon">Saloon</option>
+              <option value="Cleaning">Cleaning</option>
+              <option value="Electrician">Electrician</option>
+              <option value="Gardening">Gardening</option>
+              <option value="Plumbing">Plumbing</option>
+              <option value="Cooking">Cooking</option>
+              <option value="Appliance Repair">Appliance Repair</option>
+
+        </select>
+    <br>
+    <input type="submit" value="Update changes" class = "btn btn-success"/>
+
+    <a href="{{url_for('views.professional_logout')}}" class="btn btn-danger">Logout</a>
+    </form>
+
+{% endblock %}
+{% block style %}
+<style>
+   h1{
+      text-align: center;
+    }
+   .form{
+      text-align: center;
+    }
+   h3{
+      text-align: center;
+     }
+</style>
+{% endblock %}
+        

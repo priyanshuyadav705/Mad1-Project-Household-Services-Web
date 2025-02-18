@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Professioanal Signup - A to Z Household services
+{% endblock %}
+
+{% block content %}
+<h2> Professionals Registration</h2>
+     <hr>
+      <form method="post" class="mt-2">
+         <div>
+            Email ID: <input type="email" name="email" required>
+          </div>
+          <br>
+          <div>
+             Password : <input type="password" name="password" id="password" required>
+          </div>
+          <br>
+          <div>
+             Fullname: <input type="text" name="name" required>
+          </div>
+          <br>
+          <div>
+            <label for="service">Service Name:</label>
+               <select name="service" id="service" required>
+                  <option value="" disabled selected>Select a service</option>
+                  {% for service in services %}
+                     <option value="{{ service.service_name }}">{{ service.service_name }}</option>
+                  {% endfor %}
+               </select>
+          </div>
+          <br>
+          <div>
+              Service description  : <textarea name="service_description" id="service_description" required></textarea> 
+             
+          </div>
+          <br>
+          <div>
+              Experience : <input type="text" name="experience" id="experience" required>
+          </div>
+          <br>
+          <div>
+              Attach documents: <input type="file" name ="file" id = "file" required>
+          </div>
+          <br>
+          <div>
+              Address : <br> <textarea name="address" id="address" cols="30" rows="10" required></textarea>
+           </div>
+           <br>
+           <div>
+              Pin-Code: <input type="text" name="pincode" required >
+           </div>
+           <br>
+           <div>
+            Phone number: <input type="text" name="phonenumber" required >
+           </div>
+           <br>
+          <div>
+            <input type="submit" value="Register" class="btn btn-success mt-3">
+
+          </div>
+       </form>
+{% endblock %}
+
+{% include 'Atoz_nav.html' %} 
+
+{% block style %}
+<style>
+   .login-container form {
+      text-align: center;
+   }
+   h2 {
+      margin-top: 5%;
+      text-align: center;
+   }
+   p {
+            text-align: right;
+   }
+   div {
+            text-align: center;
+    }
+</style>
+{% endblock %}

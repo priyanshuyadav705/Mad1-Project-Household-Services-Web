@@ -1,0 +1,100 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Customer Search - A to Z Household services
+{% endblock %}
+
+{% block content %}
+<h2>Customer Search</h2>
+<br>
+{% include 'customer_search_bar.html' with context %}
+<br>
+
+{% if service_name %}
+    <h3>Results for '{{ search }}'</h3>
+    <table class="table" mt-4>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Service Name</th>
+                <th>Professional name</th>
+                <th>Base Price</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for service in service_name %}
+            <tr>
+                   <td>{{ service.service_id }}</td>
+                   <td>{{ service.service_name }}</td>
+                   <td>{% if service.professionals %}
+                           {% for professional in service.professionals %}
+                               {{ professional.name}}{% if not loop.last %}, {% endif %}
+                           {% endfor %}
+                       {% else %}
+                            No professional assigned
+                       {% endif %}
+                    </td>
+                   <td>{{ service.base_price }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% elif professional_name %}
+    <h3>Results for '{{ search }}'</h3>
+    <table class="table" mt-4>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Professional Name</th>
+                <th>Pincode</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for professional in professional_name %}
+            <tr>
+                <td>{{ professional.professional_id }}</td>
+                <td>{{ professional.name }}</td>
+                <td>{{ professional.pincode }}</td>
+                <td>{{ professional.phonenumber }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% elif pincode %}
+    <h3>Results for '{{ search }}'</h3>
+    <table class="table" mt-4>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Professional Name</th>
+                <th>Pincode</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for professional in pincode %}
+            <tr>
+                <td>{{ professional.professional_id }}</td>
+                <td>{{ professional.name }}</td>
+                <td>{{ professional.pincode }}</td>
+                <td>{{ professional.phonenumber }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% elif search == '' %}
+{% else %}
+    <p> No search found. for {{ search }}</p>
+{% endif %}
+{% endblock %}
+
+
+{% include 'customer_nav.html' %}
+
+{% block style %}
+<style>
+    h2{text-align:center ;}
+</style>
+{% endblock %}
