@@ -81,3 +81,19 @@ python main.py
 ## 🎥 Demo Video
 
 🔗 [**Watch the demo on Google Drive**](https://drive.google.com/file/d/1j8MNO3WWhrF_5kbCkayBuwv1HYILZn3E/view?usp=sharing)
+
+## 🧾 License
+
+This project was created as part of the **IIT Madras BS – Modern Application Development II** course.  
+It is for educational purposes and open for learning or extension.
+
+---
+
+## 🙌 Acknowledgements
+
+- **IIT Madras BS Program** for the MAD–I course structure.  
+- **Flask, Jinja Template, Flask-SQLAlchemy** for their excellent documentation.  
+
+**Developed by:**  
+👨‍💻 Priyanshu Yadav  
+📧 23f1000018@ds.study.iitm.ac.in
